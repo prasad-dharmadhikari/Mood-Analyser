@@ -5,7 +5,6 @@ public class MoodAnalyserTest
 {
     MoodAnalyser moodAnalyser;
     String result;
-    // Test case for Given “I am in Sad Mood” message through constructor should return SAD
     @Test
     public void givenMessage_WhenProper_RespondAsSadMood()
     {
@@ -13,7 +12,6 @@ public class MoodAnalyserTest
         result = moodAnalyser.analyseMood();
         Assert.assertEquals("SAD",result);
     }
-    // Test case for Given “I am in Happy Mood” message through constructor should return HAPPY
     @Test
     public void givenMessage_WhenProper_RespondAsHappyMood()
     {
