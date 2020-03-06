@@ -12,4 +12,11 @@ public class MoodAnalyserTest
         result = moodAnalyser.analyseMood("I am in Sad Mood");
         Assert.assertEquals("SAD",result);
     }
+    // Test case for Given “I am in Any Mood” message should return Happy
+    @Test
+    public void givenMessage_WhenProper_RespondAsHappyMood()
+    {
+        result = moodAnalyser.analyseMood("I am in Any Mood");
+        Assert.assertEquals("HAPPY",result);
+    }
 }
