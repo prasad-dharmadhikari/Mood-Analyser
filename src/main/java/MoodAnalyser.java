@@ -15,7 +15,7 @@ public class MoodAnalyser
     public String analyseMood(String message)
     {
         this.message = message;
-        return  analyseMood();
+        return analyseMood();
     }
     // Overloaded analyseMood method
     public String analyseMood()
