@@ -20,11 +20,11 @@ public class MoodAnalyser
     // Overloaded analyseMood method
     public String analyseMood()
     {
-        if (message.equals("I am in Sad Mood"))
+        if (message.contains("Sad"))
         {
             returnMessage="SAD";
         }
-        else if (message.equals("I am in Happy Mood"))
+        else if (message.contains("Happy"))
         {
             returnMessage="HAPPY";
         }
