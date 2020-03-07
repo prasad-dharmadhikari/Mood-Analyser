@@ -20,13 +20,13 @@ public class MoodAnalyser
     // Overloaded analyseMood method
     public String analyseMood()
     {
-        if (message.contains("Sad"))
+        try
         {
-            returnMessage="SAD";
+            returnMessage = (message.contains("Sad")) ? "SAD":"HAPPY";
         }
-        else if (message.contains("Happy"))
+        catch (NullPointerException e)
         {
-            returnMessage="HAPPY";
+            return "HAPPY";
         }
         return returnMessage;
     }
