@@ -6,21 +6,28 @@ public class MoodAnalyserTest
     MoodAnalyser moodAnalyser;
     String result;
     @Test
-    public void givenMessage_WhenProper_RespondAsSadMood()
+    public void givenMessage_WhenProper_RespondAsSadMood() throws MoodAnalysisException
     {
         moodAnalyser = new MoodAnalyser("I am in Sad Mood");
         result = moodAnalyser.analyseMood();
         Assert.assertEquals("SAD",result);
     }
     @Test
-    public void givenMessage_WhenProper_RespondAsHappyMood()
+    public void givenMessage_WhenProper_RespondAsHappyMood() throws MoodAnalysisException
     {
         moodAnalyser = new MoodAnalyser("I am in Happy Mood");
         result = moodAnalyser.analyseMood();
         Assert.assertEquals("HAPPY",result);
     }
     @Test
-    public void givenNullMood_ShouldReturnHappy()
+    public void givenNullMood_ShouldReturnHappy() throws MoodAnalysisException
+    {
+        moodAnalyser = new MoodAnalyser(null);
+        result = moodAnalyser.analyseMood();
+        Assert.assertEquals("HAPPY",result);
+    }
+    @Test
+    public void givenNullMood_ShouldThrowCustomException() throws MoodAnalysisException
     {
         moodAnalyser = new MoodAnalyser(null);
         result = moodAnalyser.analyseMood();
