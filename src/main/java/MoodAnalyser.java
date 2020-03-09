@@ -12,13 +12,13 @@ public class MoodAnalyser
     {
         this.message = message;
     }
-    public String analyseMood(String message)
+    public String analyseMood(String message) throws MoodAnalysisException
     {
         this.message = message;
         return analyseMood();
     }
     // Overloaded analyseMood method
-    public String analyseMood()
+    public String analyseMood() throws MoodAnalysisException
     {
         try
         {
@@ -26,7 +26,7 @@ public class MoodAnalyser
         }
         catch (NullPointerException e)
         {
-            return "HAPPY";
+            throw new MoodAnalysisException("Please enter proper message");
         }
         return returnMessage;
     }
