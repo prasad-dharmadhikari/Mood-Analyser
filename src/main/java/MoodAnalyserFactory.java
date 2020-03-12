@@ -7,8 +7,8 @@ public class MoodAnalyserFactory
     {
         try 
         {
-            Class<?> moodAnalyser = Class.forName("MoodMoodAnalyser");
-            Constructor<?> moodAnalyserConstructor = moodAnalyser.getConstructor();
+            Class<?> moodAnalyser = Class.forName("MoodAnalyser");
+            Constructor<?> moodAnalyserConstructor = moodAnalyser.getConstructor(Integer.class);
             Object moodObject = moodAnalyserConstructor.newInstance();
             return (MoodAnalyser) moodObject;
         } 
@@ -18,7 +18,7 @@ public class MoodAnalyserFactory
         }
         catch (NoSuchMethodException e)
         {
-            e.printStackTrace();
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,"Method Not found");
         }
         catch (IllegalAccessException e)
         {
