@@ -3,7 +3,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class MoodAnalyserFactory 
 {
-    public static Constructor<?> getConstructor(String className)
+    public static Constructor<?> getConstructor(String className) throws MoodAnalysisException
     {
         try 
         {
@@ -12,7 +12,7 @@ public class MoodAnalyserFactory
         } 
         catch (ClassNotFoundException e) 
         {
-            e.printStackTrace();
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS,"Class not found");
         }
         catch (NoSuchMethodException e)
         {
