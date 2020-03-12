@@ -31,8 +31,8 @@ public class MoodAnalyserTest
     {
         try
         {
-            moodAnalyser = new MoodAnalyser(null);
-            result = moodAnalyser.analyseMood();
+            moodAnalyser = new MoodAnalyser();
+            result = moodAnalyser.analyseMood(null);
         }
         catch (MoodAnalysisException e)
         {
@@ -51,5 +51,13 @@ public class MoodAnalyserTest
         {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.ENTERED_EMPTY,e.type);
         }
+    }
+    @Test
+    public void givenMoodAnalyser_WhenProper_ShouldReturnObject()
+    {
+        moodAnalyser = new MoodAnalyser();
+        MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject();
+        boolean result = moodAnalyser.equals(moodAnalyserObject);
+        Assert.assertEquals(false,result);
     }
 }
