@@ -3,13 +3,13 @@ import java.lang.reflect.InvocationTargetException;
 
 public class MoodAnalyserFactory 
 {
-    public static MoodAnalyser createMoodAnalyserObject() throws MoodAnalysisException
+    public static MoodAnalyser createMoodAnalyserObject(String message) throws MoodAnalysisException
     {
         try 
         {
             Class<?> moodAnalyser = Class.forName("MoodAnalyser");
-            Constructor<?> moodAnalyserConstructor = moodAnalyser.getConstructor(Integer.class);
-            Object moodObject = moodAnalyserConstructor.newInstance();
+            Constructor<?> moodAnalyserConstructor = moodAnalyser.getConstructor(String.class);
+            Object moodObject = moodAnalyserConstructor.newInstance(message);
             return (MoodAnalyser) moodObject;
         } 
         catch (ClassNotFoundException e)
