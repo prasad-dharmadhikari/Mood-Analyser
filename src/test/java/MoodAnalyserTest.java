@@ -1,10 +1,14 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 public class MoodAnalyserTest
 {
     MoodAnalyser moodAnalyser;
     String result;
+    boolean check;
     String message = "I am in happy mood";
     @Test
     public void givenMessage_WhenProper_RespondAsSadMood() throws MoodAnalysisException
@@ -54,43 +58,12 @@ public class MoodAnalyserTest
         }
     }
     @Test
-    public void givenMoodAnalyser_WhenProper_ShouldReturnObject() throws MoodAnalysisException
+    public void givenMoodAnalyser_WhenProper_ShouldReturnObject() throws IllegalAccessException, InstantiationException, InvocationTargetException
     {
-        moodAnalyser = new MoodAnalyser(message);
-        MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject(message);
-        boolean result = moodAnalyser.equals(moodAnalyserObject);
-        Assert.assertEquals(true,result);
-    }
-    @Test
-    public void givenClassName_WhenImproper_ShouldThrowMoodAnalysisException()
-    {
-        try
-        {
-            MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject(message);
-        }
-        catch (MoodAnalysisException e)
-        {
-            Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS,e.type);
-        }
-    }
-    @Test
-    public void givenClass_WhenConstructorNotProper_ShouldThrowMoodAnalysisException()
-    {
-        try
-        {
-            MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject(message);
-        }
-        catch (MoodAnalysisException e)
-        {
-            Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,e.type);
-        }
-    }
-    @Test
-    public void givenMoodAnalyser_WithParameterizedConstructor_WhenProper_ShouldReturnObject() throws MoodAnalysisException
-    {
-        moodAnalyser = new MoodAnalyser(message);
-        MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject(message);
-        boolean result = moodAnalyser.equals(moodAnalyserObject);
-        Assert.assertEquals(true,result);
+        moodAnalyser = new MoodAnalyser();
+        Constructor<?> moodAnalyserConstructor = MoodAnalyserFactory.getConstructor("MoodAnalyser");
+        MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject(moodAnalyserConstructor);
+        check = moodAnalyser.equals(moodAnalyserObject);
+        Assert.assertEquals(true,check);
     }
 }
