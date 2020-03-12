@@ -56,7 +56,7 @@ public class MoodAnalyserTest
     @Test
     public void givenMoodAnalyser_WhenProper_ShouldReturnObject() throws MoodAnalysisException
     {
-        moodAnalyser = new MoodAnalyser();
+        moodAnalyser = new MoodAnalyser(message);
         MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject(message);
         boolean result = moodAnalyser.equals(moodAnalyserObject);
         Assert.assertEquals(true,result);
