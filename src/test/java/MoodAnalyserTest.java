@@ -68,7 +68,6 @@ public class MoodAnalyserTest
     @Test
     public void givenClassName_WhenImproper_ShouldThrowMoodAnalysisException() throws IllegalAccessException, InstantiationException, InvocationTargetException
     {
-        moodAnalyser = new MoodAnalyser();
         try
         {
             Constructor<?> moodAnalyserConstructor = MoodAnalyserFactory.getConstructor("CroodAnalyser");
@@ -76,6 +75,18 @@ public class MoodAnalyserTest
         catch (MoodAnalysisException e)
         {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS,e.type);
+        }
+    }
+    @Test
+    public void givenClass_WhenConstructorIsNotProper_ShouldThrowMoodAnalysisException()
+    {
+        try
+        {
+            Constructor<?> moodAnalyserConstructor = MoodAnalyserFactory.getConstructor("MoodAnalyser",Integer.class);
+        }
+        catch (MoodAnalysisException e)
+        {
+            Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,e.type);
         }
     }
 }
