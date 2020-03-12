@@ -32,7 +32,7 @@ public class MoodAnalyser
         }
         catch (NullPointerException e)
         {
-            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ENTERED_NULL,"Please enter proper message");
+            return "HAPPY";
         }
         return returnMessage;
     }
