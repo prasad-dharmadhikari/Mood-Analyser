@@ -5,6 +5,7 @@ public class MoodAnalyserTest
 {
     MoodAnalyser moodAnalyser;
     String result;
+    String message = "I am in happy mood";
     @Test
     public void givenMessage_WhenProper_RespondAsSadMood() throws MoodAnalysisException
     {
@@ -56,7 +57,7 @@ public class MoodAnalyserTest
     public void givenMoodAnalyser_WhenProper_ShouldReturnObject() throws MoodAnalysisException
     {
         moodAnalyser = new MoodAnalyser();
-        MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject();
+        MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject(message);
         boolean result = moodAnalyser.equals(moodAnalyserObject);
         Assert.assertEquals(true,result);
     }
@@ -65,7 +66,7 @@ public class MoodAnalyserTest
     {
         try
         {
-            MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject();
+            MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject(message);
         }
         catch (MoodAnalysisException e)
         {
@@ -77,11 +78,19 @@ public class MoodAnalyserTest
     {
         try
         {
-            MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject();
+            MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject(message);
         }
         catch (MoodAnalysisException e)
         {
             Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,e.type);
         }
+    }
+    @Test
+    public void givenMoodAnalyser_WithParameterizedConstructor_WhenProper_ShouldReturnObject() throws MoodAnalysisException
+    {
+        moodAnalyser = new MoodAnalyser(message);
+        MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject(message);
+        boolean result = moodAnalyser.equals(moodAnalyserObject);
+        Assert.assertEquals(true,result);
     }
 }
