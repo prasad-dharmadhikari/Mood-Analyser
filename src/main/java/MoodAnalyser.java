@@ -36,12 +36,19 @@ public class MoodAnalyser
         }
         return returnMessage;
     }
-    public boolean equals (Object another)
+    @Override
+    public boolean equals(Object o)
     {
-        if (this == another)
-        {
+        if (this == o)
             return true;
-        }
-        return false;
+        if (!(o instanceof MoodAnalyser))
+            return false;
+        MoodAnalyser that = (MoodAnalyser) o;
+        return Objects.equals(message, that.message) && Objects.equals(returnMessage, that.returnMessage);
+    }
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(message, returnMessage);
     }
 }
