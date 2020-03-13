@@ -40,16 +40,21 @@ public class MoodAnalyserFactory
         }
         return method.invoke(moodAnalyserObject);
     }
-    public static void setVariableValues(MoodAnalyser moodAnalyserObject, String variableName, String variableValue) throws IllegalAccessException, InvocationTargetException, InstantiationException, ClassNotFoundException, MoodAnalysisException {
+    public static void setVariableValues(MoodAnalyser moodAnalyserObject, String variableName, String variableValue) throws IllegalAccessException, InvocationTargetException, InstantiationException, ClassNotFoundException, MoodAnalysisException
+    {
         Field field = null;
         try
         {
             field = moodAnalyserObject.getClass().getField(variableName);
+            field.set(moodAnalyserObject,variableValue);
         }
         catch (NoSuchFieldException e)
         {
             throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_FIELD,"No such field");
         }
-        field.set(moodAnalyserObject,variableValue);
+        catch (NullPointerException e)
+        {
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ENTERED_NULL,"Null value entered");
+        }
     }
 }
