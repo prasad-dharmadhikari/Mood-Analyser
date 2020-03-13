@@ -115,7 +115,7 @@ public class MoodAnalyserTest
     {
         try
         {
-            Constructor<?> moodAnalyserConstructor = MoodAnalyserFactory.getConstructor("MoodAnalyser",Integer.class);
+            Constructor<?> moodAnalyserConstructor = MoodAnalyserFactory.getConstructor("MoodAnalyser",Integer.class,String.class);
         }
         catch (MoodAnalysisException e)
         {
