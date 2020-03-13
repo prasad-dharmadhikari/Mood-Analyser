@@ -167,4 +167,19 @@ public class MoodAnalyserTest
             Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_FIELD,e.type);
         }
     }
+
+    @Test
+    public void settingNullMessage_WithReflection_ShouldThrowException() throws MoodAnalysisException, IllegalAccessException, InstantiationException, InvocationTargetException, ClassNotFoundException
+    {
+        try
+        {
+            Constructor<?> moodAnalyserConstructor = MoodAnalyserFactory.getConstructor("MoodAnalyser");
+            MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject(moodAnalyserConstructor);
+            MoodAnalyserFactory.setVariableValues(moodAnalyserObject, "message", null);
+        }
+        catch (MoodAnalysisException e)
+        {
+            Assert.assertEquals(MoodAnalysisException.ExceptionType.ENTERED_NULL,e.type);
+        }
+    }
 }
