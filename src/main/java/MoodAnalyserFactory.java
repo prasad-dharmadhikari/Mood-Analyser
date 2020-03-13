@@ -1,4 +1,5 @@
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -38,5 +39,10 @@ public class MoodAnalyserFactory
             throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,"Method not found");
         }
         return method.invoke(moodAnalyserObject);
+    }
+    public static void setVariableValues(MoodAnalyser moodAnalyserObject, String variableName, String variableValue) throws IllegalAccessException, InvocationTargetException, InstantiationException, ClassNotFoundException, NoSuchFieldException
+    {
+        Field field = moodAnalyserObject.getClass().getField(variableName);
+        field.set(moodAnalyserObject,variableValue);
     }
 }
