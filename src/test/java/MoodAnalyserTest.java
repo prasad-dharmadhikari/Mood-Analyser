@@ -98,4 +98,16 @@ public class MoodAnalyserTest
         check = moodAnalyser.equals(moodAnalyserObject);
         Assert.assertEquals(true,check);
     }
+    @Test
+    public void givenMoodAnalyserWithParametrizedConstructor_WhenImproper_ShouldThrowMoodAnalysisException() throws MoodAnalysisException, IllegalAccessException, InstantiationException, InvocationTargetException
+    {
+        try
+        {
+            Constructor<?> moodAnalyserConstructor = MoodAnalyserFactory.getConstructor("CroodAnalyser",String.class);
+        }
+        catch (MoodAnalysisException e)
+        {
+            Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS,e.type);
+        }
+    }
 }
