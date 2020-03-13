@@ -153,4 +153,18 @@ public class MoodAnalyserTest
         Object result = MoodAnalyserFactory.createMethod(moodAnalyserObject,"analyseMood");
         Assert.assertEquals("HAPPY",result);
     }
+    @Test
+    public void setField_WhenImproper_ShouldThrowExceptionWithNoSuchField() throws MoodAnalysisException, IllegalAccessException, InstantiationException, InvocationTargetException, ClassNotFoundException
+    {
+        try
+        {
+            Constructor<?> moodAnalyserConstructor = MoodAnalyserFactory.getConstructor("MoodAnalyser");
+            MoodAnalyser moodAnalyserObject = MoodAnalyserFactory.createMoodAnalyserObject(moodAnalyserConstructor);
+            MoodAnalyserFactory.setVariableValues(moodAnalyserObject,"message","I am in happy mood");
+        }
+        catch (MoodAnalysisException e)
+        {
+            Assert.assertEquals(MoodAnalysisException.ExceptionType.NO_SUCH_FIELD,e.type);
+        }
+    }
 }
