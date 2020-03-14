@@ -2,6 +2,7 @@ import java.util.Objects;
 
 public class MoodAnalyser
 {
+    // Fields
     public String message;
     public String returnMessage;
     //no-arg constructor
@@ -14,6 +15,7 @@ public class MoodAnalyser
     {
         this.message = message;
     }
+    // analyseMood method
     public String analyseMood(String message) throws MoodAnalysisException
     {
         this.message = message;
@@ -26,9 +28,9 @@ public class MoodAnalyser
         {
             if (message.length() == 0)
             {
-                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ENTERED_EMPTY,"Please enter proper mood");
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ENTERED_EMPTY, "Please enter proper mood");
             }
-            returnMessage = (message.contains("Sad")) ? "SAD":"HAPPY";
+            returnMessage = (message.contains("Sad")) ? "SAD" : "HAPPY";
         }
         catch (NullPointerException e)
         {
@@ -37,6 +39,7 @@ public class MoodAnalyser
         return returnMessage;
     }
     @Override
+    // Overrided equals method
     public boolean equals(Object o)
     {
         if (this == o)
@@ -47,6 +50,7 @@ public class MoodAnalyser
         return Objects.equals(message, that.message) && Objects.equals(returnMessage, that.returnMessage);
     }
     @Override
+    // Overrided hashCode method
     public int hashCode()
     {
         return Objects.hash(message, returnMessage);

@@ -3,29 +3,31 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class MoodAnalyserFactory 
+public class MoodAnalyserFactory
 {
-    public static Constructor<?> getConstructor(String className, Class<?> ... param) throws MoodAnalysisException
+    // Method to return constructor
+    public static Constructor<?> getConstructor(String className, Class<?>... param) throws MoodAnalysisException
     {
-        try 
+        try
         {
             Class<?> moodAnalyserClass = Class.forName(className);
             return moodAnalyserClass.getConstructor(param);
-        } 
-        catch (ClassNotFoundException e) 
+        }
+        catch (ClassNotFoundException e)
         {
-            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS,"Class not found");
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, "Class not found");
         }
         catch (NoSuchMethodException e)
         {
-            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,"Method not found");
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "Method not found");
         }
     }
-    public static MoodAnalyser createMoodAnalyserObject(Constructor<?> moodAnalyserConstructor,Object ... message) throws IllegalAccessException, InvocationTargetException, InstantiationException
+    // Method to return object
+    public static MoodAnalyser createMoodAnalyserObject(Constructor<?> moodAnalyserConstructor, Object... message) throws IllegalAccessException, InvocationTargetException, InstantiationException
     {
         return (MoodAnalyser) moodAnalyserConstructor.newInstance(message);
     }
-
+    // Method to invoke method
     public static Object createMethod(MoodAnalyser moodAnalyserObject, String methodName) throws InvocationTargetException, IllegalAccessException, MoodAnalysisException
     {
         Method method = null;
@@ -36,25 +38,26 @@ public class MoodAnalyserFactory
         }
         catch (NoSuchMethodException e)
         {
-            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD,"Method not found");
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "Method not found");
         }
         return method.invoke(moodAnalyserObject);
     }
+    // Method to set variables
     public static void setVariableValues(MoodAnalyser moodAnalyserObject, String variableName, String variableValue) throws IllegalAccessException, InvocationTargetException, InstantiationException, ClassNotFoundException, MoodAnalysisException
     {
         Field field = null;
         try
         {
             field = moodAnalyserObject.getClass().getField(variableName);
-            field.set(moodAnalyserObject,variableValue);
+            field.set(moodAnalyserObject, variableValue);
         }
         catch (NoSuchFieldException e)
         {
-            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_FIELD,"No such field");
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_FIELD, "No such field");
         }
         catch (NullPointerException e)
         {
-            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ENTERED_NULL,"Null value entered");
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ENTERED_NULL, "Null value entered");
         }
     }
 }
